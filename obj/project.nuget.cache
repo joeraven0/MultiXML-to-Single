@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "qBqZDQ/YtSfV6jFZ5ZSJq/KOnXgeh/lkLp7GSms4ifmvPLjaLljxv5vDFddSiVhVbPDKCsjypxu4KKfqe6/sbA==",
+  "success": true,
+  "projectFilePath": "/home/jr/kodprojekt/statistics/statistics.csproj",
+  "expectedPackageFiles": [
+    "/home/jr/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

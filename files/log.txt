@@ -1,0 +1,18 @@
+##TEST##2023-05-22 23:35:56
+Report ID: 12347
+Report Time: 2023-05-24T10:30:00
+Overall Result: Passed
+Sequence: 123
+Computer Name: TestStation1
+##TEST##2023-05-22 23:35:56
+Report ID: 12346
+Report Time: 2023-05-23T10:30:00
+Overall Result: Failed
+Sequence: 123
+Computer Name: TestStation1
+##TEST##2023-05-22 23:35:56
+Report ID: 12345
+Report Time: 2023-05-22T10:30:00
+Overall Result: Passed
+Sequence: 123
+Computer Name: TestStation1

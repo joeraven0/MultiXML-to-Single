@@ -1,0 +1,15 @@
+/home/jr/kodprojekt/statistics/bin/Debug/net7.0/statistics
+/home/jr/kodprojekt/statistics/bin/Debug/net7.0/statistics.deps.json
+/home/jr/kodprojekt/statistics/bin/Debug/net7.0/statistics.runtimeconfig.json
+/home/jr/kodprojekt/statistics/bin/Debug/net7.0/statistics.dll
+/home/jr/kodprojekt/statistics/bin/Debug/net7.0/statistics.pdb
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.csproj.AssemblyReference.cache
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.GeneratedMSBuildEditorConfig.editorconfig
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.AssemblyInfoInputs.cache
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.AssemblyInfo.cs
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.csproj.CoreCompileInputs.cache
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.dll
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/refint/statistics.dll
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.pdb
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/statistics.genruntimeconfig.cache
+/home/jr/kodprojekt/statistics/obj/Debug/net7.0/ref/statistics.dll

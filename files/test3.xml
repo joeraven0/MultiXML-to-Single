@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestStandData>
+  <ReportSettings>
+    <ReportID>12347</ReportID>
+    <ReportTime>2023-05-24T10:30:00</ReportTime>
+    <!-- Andra inställningar för rapporten -->
+  </ReportSettings>
+  <TestResults>
+    <TestModuleResult>
+      <ModuleName>Test Module 1</ModuleName>
+      <ExecutionResult>
+        <Status>Passed</Status>
+        <StartTime>2023-05-22T10:00:00</StartTime>
+        <EndTime>2023-05-22T10:15:00</EndTime>
+        <!-- Andra utföranderesultat för testet -->
+      </ExecutionResult>
+      <UUTResults>
+        <UUTResult>
+          <UUTName>UUT 1</UUTName>
+          <StepResults>
+            <StepResult>
+              <StepName>Test Step 1</StepName>
+              <Status>Passed</Status>
+              <Message>Alla tester passerade.</Message>
+              <!-- Ytterligare stegresultat för testet -->
+            </StepResult>
+          </StepResults>
+        </UUTResult>
+      </UUTResults>
+    </TestModuleResult>
+    <!-- Andra testmoduleresultat för rapporten -->
+  </TestResults>
+  <OverallResult>Passed</OverallResult>
+  <Sequence>123</Sequence>
+  <ComputerName>TestStation1</ComputerName>
+</TestStandData>
