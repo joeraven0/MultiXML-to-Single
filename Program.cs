@@ -4,79 +4,141 @@ using System.Xml;
 
 class Program
 {
+    static string[] xmlFiler;
+    static string mappSökväg = "/home/jr/kodprojekt/statistics/files/"; // Ange sökvägen till mappen här
+    string outputFilePath = mappSökväg + "log.txt";
+
+    static List<string> UUT_SN;
+    static List<string> UUT_Result;
+    static List<string> UUT_Date;
     static void Main()
     {
-        string mappSökväg = "/home/jr/kodprojekt/statistics/files/"; // Ange sökvägen till mappen här
-        string outputFilePath = mappSökväg+"log.txt";
-        File.WriteAllText(outputFilePath, string.Empty);
-        
-        
-        string[] xmlFiler = Directory.GetFiles(mappSökväg, "*.xml");
-        foreach (string filSökväg in xmlFiler)
-        {
-            LogXmlToFile(filSökväg, outputFilePath);
+
+        Program program = new Program();
+        program.Get_MTD_files();
+
+        UUT_SN = program.Get_XML_PropField("//Prop[@Name='SerialNumber']");
+        UUT_Result = program.Get_XML_Attribute("//Report[@Type='UUT']", "UUTResult");
+        UUT_Date = program.Get_XML_PropField("//Prop[@Name='StartDate']//Prop[@Name='ShortText']");
+        List<List<string>> output = new List<List<string>>();
+        List<string> innerList = new List<string>();
+        for(int i=0;i<UUT_SN.Count;i++)
+        {            
+            innerList.Add(UUT_Date[i]);
+            innerList.Add(UUT_SN[i]);
+            innerList.Add(UUT_Result[i]);
+            output.Add(innerList);
+            innerList.Clear();
         }
-    }
-
-    static void LogXmlToFile(string xmlFilePath, string outputFilePath)
-    {
-        // Skapa en XmlTextReader för att läsa XML-filen
-        using (XmlTextReader reader = new XmlTextReader(xmlFilePath))
+        foreach (string item in output[0])
         {
-            // Skapa eller öppna textfilen i append-läget
-            using (StreamWriter writer = new StreamWriter(outputFilePath, true))
+            Console.WriteLine(item);
+        }
+        //program.printAll(UUT_SN, "", UUT_Result, "");
+    }
+    private List<string> Get_XML_Attribute(string xmlAttribute, string xmlAttributeValue)
+    {
+        // Skapa ett XmlDocument-objekt och ladda XML-koden
+
+        // Skapa ett XmlDocument-objekt och ladda XML-koden
+        List<string> tmpList = new List<string>();
+        foreach (string filSökväg in xmlFiler)
+
+        {
+
+            XmlDocument xmlDoc = new XmlDocument();
+
+            string xml = File.ReadAllText(filSökväg);
+            xmlDoc.LoadXml(xml);
+
+
+
+            // Hitta Report-elementet baserat på attributet Type
+            XmlNode reportNode = xmlDoc.SelectSingleNode(xmlAttribute);
+
+            if (reportNode != null)
             {
-                DateTime now = DateTime.Now;
-                string timestamp = now.ToString("yyyy-MM-dd HH:mm:ss");
-                writer.WriteLine("##TEST##"+timestamp);
-                // Sök igenom XML-filen
-                while (reader.Read())
+                // Hämta värdet för attributet UUTResult
+                string attribute = reportNode.Attributes[xmlAttributeValue].Value;
+
+                // Skriv ut resultatet
+                //Console.WriteLine(uutResult);
+                tmpList.Add(attribute);
+            }
+            else
+            {
+                Console.WriteLine("Report element not found.");
+            }
+        }
+        return tmpList;
+    }
+    private void Get_MTD_files()
+    {
+        File.WriteAllText(outputFilePath, string.Empty);
+        xmlFiler = Directory.GetFiles(mappSökväg, "*.mtd");
+    }
+    private void printAll(List<string> list1, string rule1, List<string> list2, string rule2)
+    {
+        if (list1.Count == list2.Count)
+        {
+            for (int num = 0; num < list1.Count; num++)
+            {
+                if ((rule1.Equals(list1[num])||rule1.Equals(""))&&(rule2.Equals(list2[num])||rule2.Equals("")))
                 {
-                    // Kontrollera om den aktuella noden är ett element
-                    if (reader.NodeType == XmlNodeType.Element)
-                    {
-                        // Om noden är "OverallResult"
-                        if (reader.Name == "OverallResult")
-                        {
-                            reader.Read(); // Läs värdet av "OverallResult"
-                            string overallResult = reader.Value;
-                            writer.WriteLine("Overall Result: " + overallResult);
-                        }
-
-                        // Om noden är "ReportTime"
-                        if (reader.Name == "ReportTime")
-                        {
-                            reader.Read(); // Läs värdet av "ReportTime"
-                            string reportTime = reader.Value;
-                            writer.WriteLine("Report Time: " + reportTime);
-                        }
-
-                        // Om noden är "ReportID"
-                        if (reader.Name == "ReportID")
-                        {
-                            reader.Read(); // Läs värdet av "ReportID"
-                            string reportID = reader.Value;
-                            writer.WriteLine("Report ID: " + reportID);
-                        }
-
-                        // Om noden är "Sequence"
-                        if (reader.Name == "Sequence")
-                        {
-                            reader.Read(); // Läs värdet av "Sequence"
-                            string sequence = reader.Value;
-                            writer.WriteLine("Sequence: " + sequence);
-                        }
-
-                        // Om noden är "ComputerName"
-                        if (reader.Name == "ComputerName")
-                        {
-                            reader.Read(); // Läs värdet av "ComputerName"
-                            string computerName = reader.Value;
-                            writer.WriteLine("Computer Name: " + computerName);
-                        }
-                    }
+                    Console.WriteLine(list1[num] + " " + list2[num]);
                 }
             }
         }
+        else
+        {
+            Console.WriteLine("ERROR::printAll:List size not equal");
+        }
     }
+    private List<string> Get_XML_PropField(string xmlField)
+    {
+        List<string> tmpList = new List<string>();
+        if (xmlField != null)
+        {
+            foreach (string filSökväg in xmlFiler)
+            {
+
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load(filSökväg);
+                // Find the desired Prop element based on the Name attribute
+                string singlenodequery = xmlField;
+                XmlNode prop;
+
+                try
+                {
+                    prop = xmlDoc.SelectSingleNode(singlenodequery);
+                }
+                catch (System.Exception)
+                {
+
+                    throw;
+                }
+
+                if (prop != null)
+                {
+                    // Get the value from the Value element
+                    XmlNode valueNode = prop.SelectSingleNode("Value");
+                    string value = valueNode.InnerText;
+
+                    // Output the value
+                    if (value == null)
+                    {
+                        value = "";
+                    }
+                    tmpList.Add(value);
+                }
+                else
+                {
+                    Console.WriteLine("Prop element not found.");
+                }
+            }
+        }
+        return tmpList;
+    }
+
+
 }
